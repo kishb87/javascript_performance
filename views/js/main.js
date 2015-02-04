@@ -1,16 +1,12 @@
 /*
 Welcome to the 60fps project! Your goal is to make Cam's Pizzeria website run
 jank-free at 60 frames per second.
-
 There are two major issues in this code that lead to sub-60fps performance. Can
 you spot and fix both?
-
-
 Built into the code, you'll find a few instances of the User Timing API
 (window.performance), which will be console.log()ing frame rate data into the
 browser console. To learn more about User Timing API, check out:
 http://www.html5rocks.com/en/tutorials/webperformance/usertiming/
-
 Creator:
 Cameron Pittman, Udacity Course Developer
 cameron *at* udacity *dot* com
@@ -450,10 +446,15 @@ var resizePizzas = function(size) {
 
   // Iterates through pizza elements on the page and changes their widths
   function changePizzaSizes(size) {
-    for (var i = 0; i < document.querySelectorAll(".randomPizzaContainer").length; i++) {
-      var dx = determineDx(document.querySelectorAll(".randomPizzaContainer")[i], size);
-      var newwidth = (document.querySelectorAll(".randomPizzaContainer")[i].offsetWidth + dx) + 'px';
-      document.querySelectorAll(".randomPizzaContainer")[i].style.width = newwidth;
+
+    var length = document.querySelectorAll(".randomPizzaContainer").length;
+    var selection = document.querySelectorAll(".randomPizzaContainer");
+    var element = document.querySelector(".randomPizzaContainer");
+    var dx = determineDx(element, size);
+    var newwidth = (element.offsetWidth + dx) + 'px';
+
+    for (var i = 0; i < length; i++) {
+      selection[i].style.width = newwidth;
     }
   }
 
@@ -505,6 +506,7 @@ function updatePositions() {
   var items = document.querySelectorAll('.mover');
   var length = items.length;
   var scroll = document.body.scrollTop / 1250;
+
   for (var i = 0; i < length; i++) {
     var phase = Math.sin( scroll + (i % 5));
     items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
@@ -527,12 +529,12 @@ window.addEventListener('scroll', updatePositions);
 document.addEventListener('DOMContentLoaded', function() {
   var cols = 8;
   var s = 256;
-  for (var i = 0; i < 200; i++) {
+  for (var i = 0; i < 20; i++) {
     var elem = document.createElement('img');
     elem.className = 'mover';
-    elem.src = "images/pizza.png";
-    elem.style.height = "100px";
-    elem.style.width = "73.333px";
+    elem.src = "images/pizza-small.png";
+    elem.style.height = "96px";
+    elem.style.width = "95px";
     elem.basicLeft = (i % cols) * s;
     elem.style.top = (Math.floor(i / cols) * s) + 'px';
     document.querySelector("#movingPizzas1").appendChild(elem);
