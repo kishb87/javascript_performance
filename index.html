@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <!-- style tag included to help load critical content faster -->
     <style>
         header { padding: 0 0.5em; color: #C90B0B; }
         header img { border-radius: 40px; float: left; }
@@ -63,6 +64,7 @@
     </footer>
   </body>
 
+  <!-- async javascript to prevent render blocking -->
   <script async>
     (function(w,g){w['GoogleAnalyticsObject']=g;
     w[g]=w[g]||function(){(w[g].q=w[g].q||[]).push(arguments)};w[g].l=1*new Date();})(window,'ga');
